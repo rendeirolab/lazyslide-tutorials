@@ -1,0 +1,74 @@
+name: Execute notebooks
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/build_notebooks.yaml"
+      - "tutorials/**"
+      - "pyproject.toml"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build_notebooks.yaml"
+      - "tutorials/**"
+      - "pyproject.toml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  runnbs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allow GH actions to push changes to repo
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.head_ref || github.ref }}
+          filter: blob:none
+          fetch-depth: 0
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Install project
+        run: uv sync --dev
+      - name: Cache notebooks
+        uses: actions/cache@v4
+        env:
+          # Increase this value to reset cache if env file has not changed
+          CACHE_NUMBER: 0
+        with:
+          path: .jupyter_cache
+          key: ${{ runner.os }}-uv-${{ env.CACHE_NUMBER }}-${{ hashFiles('uv.lock') }}
+      - name: execute notebooks
+        run: |
+          mkdir -p .jupyter_cache
+
+          # First remove all notebooks from the project, then add all again.
+          # This does not remove them from the cache. This step is required since a notebook could be in the cache, but not in the PR.
+          uv run jcache notebook clear --force
+          uv run jcache notebook add tutorials/*.ipynb
+          uv run jcache project execute --executor local-parallel --timeout 1800
+
+      - name: output logs
+        run: |
+          uv run jcache notebook list
+          for f in tutorials/*.ipynb ; do
+            uv run jcache notebook info --tb $f
+          done
+
+      # write changed outputs back to the ipynb files
+      # will fail if there was an execution error
+      - name: merge notebooks
+        run: |
+          for f in tutorials/*.ipynb ; do
+            jcache notebook merge $f $f
+          done
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Render notebooks

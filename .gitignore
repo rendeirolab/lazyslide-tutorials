@@ -206,3 +206,9 @@ __marimo__/
 # Exclude huggingface cache
 datasets*/
 .locks
+
+# Exclude data files
+*.h5ad
+*.csv
+*.csv.gz
+*.svs
