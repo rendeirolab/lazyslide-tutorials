@@ -48,6 +48,8 @@ jobs:
         run: |
           mkdir -p .jupyter_cache
 
+          uv run scripts/setup_env.py
+
           # First remove all notebooks from the project, then add all again.
           # This does not remove them from the cache. This step is required since a notebook could be in the cache, but not in the PR.
           uv run jcache notebook clear --force

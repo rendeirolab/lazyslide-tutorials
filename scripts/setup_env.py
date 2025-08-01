@@ -7,12 +7,14 @@ def setup_data():
 
     snapshot_download(
         "rendeirolab/lazyslide-data",
+        ignore_patterns=["gtex_artery_data/*"],
         repo_type="dataset",
     )
 
     snapshot_download(
         "rendeirolab/lazyslide-data",
         repo_type="dataset",
+        ignore_patterns=["gtex_artery_data/*"],
         cache_dir=Path(__file__).parent.parent / "tutorials",
     )
 
