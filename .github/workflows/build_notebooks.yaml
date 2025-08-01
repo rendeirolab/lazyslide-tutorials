@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   runnbs:
-    runs-on: ubuntu-latest
+    runs-on: linux-cpu8-300g
     permissions:
       contents: write # Allow GH actions to push changes to repo
     steps:
@@ -70,7 +70,7 @@ jobs:
       - name: merge notebooks
         run: |
           for f in tutorials/*.ipynb ; do
-            jcache notebook merge $f $f
+            uv run jcache notebook merge $f $f
           done
 
       - uses: stefanzweifel/git-auto-commit-action@v4
