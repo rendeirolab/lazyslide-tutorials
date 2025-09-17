@@ -205,10 +205,18 @@ __marimo__/
 
 # Exclude huggingface cache
 datasets*/
+tcga_read/
 .locks
+
+# Exclude lightning logs and checkpoints
+lightning_logs/
+checkpoints/
 
 # Exclude data files
 *.h5ad
 *.csv
 *.csv.gz
 *.svs
+*.pt
+*.pth
+*.ckpt
