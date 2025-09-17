@@ -35,6 +35,7 @@ dependencies = [
     "dask-labextension>=7.0.0",
     "einops>=0.8.1",
     "einops-exts>=0.0.4",
+    "lightning>=2.5.5",
 ]
 
 [tool.uv.sources]
