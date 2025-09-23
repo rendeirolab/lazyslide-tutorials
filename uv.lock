@@ -1844,8 +1844,8 @@ wheels = [
 
 [[package]]
 name = "lazyslide"
-version = "0.8.3"
-source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#8f84f3aaddb7de643f528f3bf41772cda948e990" }
+version = "0.8.3.post1.dev0+6c1c66b"
+source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#6c1c66b82fe1ad05f14c7cb61bd4271e3ff514ca" }
 dependencies = [
     { name = "cyclopts" },
     { name = "legendkit" },
@@ -1894,6 +1894,7 @@ dependencies = [
     { name = "scanpy" },
     { name = "scikit-survival" },
     { name = "seaborn" },
+    { name = "spatialdata-plot" },
     { name = "torchsurv" },
     { name = "transformers" },
 ]
@@ -1934,6 +1935,7 @@ requires-dist = [
     { name = "scanpy", specifier = ">=1.11.3" },
     { name = "scikit-survival", specifier = ">=0.24.1" },
     { name = "seaborn", specifier = ">=0.13.2" },
+    { name = "spatialdata-plot", specifier = ">=0.2.12" },
     { name = "torchsurv", specifier = ">=0.1.5" },
     { name = "transformers", specifier = "==4.52.3" },
 ]
@@ -4159,6 +4161,22 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/31/29/9e7c46cf134854e27996fd4af7d27e184e57f5083b019e9757c4add6a600/spatialdata-0.5.0.tar.gz", hash = "sha256:3c316cdebe7306e887f9383c360993a1db0a7bd1b00b5673d831d23769acf63b", size = 326264 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8b/45/f16a66337b05f6c4829d0e9bdc0c6f876e5a193a1cdc1c88f7dee5a3762a/spatialdata-0.5.0-py3-none-any.whl", hash = "sha256:0d513c7da63e4b05a197af70605c51bf074c3fceb81fcdda282637efef425ea6", size = 185333 },
+]
+
+[[package]]
+name = "spatialdata-plot"
+version = "0.2.12"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "matplotlib" },
+    { name = "matplotlib-scalebar" },
+    { name = "scanpy" },
+    { name = "scikit-learn" },
+    { name = "spatialdata" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c2/af/b0536d2f7c3f44acedacac09de98c93cc165fc082a042b011b6e5a96961f/spatialdata_plot-0.2.12.tar.gz", hash = "sha256:76bade5a7d4906b2fb75d70a071370883d821914c1202fa20b88447bea22bbfd", size = 8790182 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d5/85/af535648e89b3084a0fd8f9f765e07eedcb2a5b96e7dedd0b8e541109de9/spatialdata_plot-0.2.12-py3-none-any.whl", hash = "sha256:a49868b860fd065d255da2ebdce5e42eaf0a3af5d29fb768fed8c37483729bc4", size = 48691 },
 ]
 
 [[package]]

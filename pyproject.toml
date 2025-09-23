@@ -36,6 +36,7 @@ dependencies = [
     "einops>=0.8.1",
     "einops-exts>=0.0.4",
     "lightning>=2.5.5",
+    "spatialdata-plot>=0.2.12",
 ]
 
 [tool.uv.sources]
