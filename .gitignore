@@ -216,7 +216,10 @@ checkpoints/
 *.h5ad
 *.csv
 *.csv.gz
-*.svs
+*.svs*
 *.pt
 *.pth
 *.ckpt
+*.zarr/
+*.png
+*.txt
