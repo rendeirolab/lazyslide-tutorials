@@ -18,6 +18,7 @@ dependencies = [
     "jupyter-cache>=1.0.1",
     "jupytext>=1.17.2",
     "lazyslide",
+    "wsidata",
     "marsilea>=0.5.3",
     "mofapy2>=0.7.2",
     "mpl-fontkit>=0.5.1",
