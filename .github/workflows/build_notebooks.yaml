@@ -56,7 +56,7 @@ jobs:
           # This does not remove them from the cache. This step is required since a notebook could be in the cache, but not in the PR.
           uv run jcache notebook clear --force
           uv run jcache notebook add tutorials/*.ipynb
-          uv run jcache project execute --executor local-parallel --timeout 1800
+          uv run jcache project execute --executor local-parallel --workers 5 --timeout 1800
 
       - name: output logs
         run: |
