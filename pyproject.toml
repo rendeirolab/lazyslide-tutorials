@@ -13,7 +13,7 @@ dependencies = [
     "environs>=14.2.0",
     "gseapy>=1.1.9",
     "igraph>=0.11.9",
-    "ipykernel==6.30.1",
+    "ipykernel>=6.30.1",
     "ipywidgets>=8.1.7",
     "jupyter-cache>=1.0.1",
     "jupytext>=1.17.2",
@@ -29,7 +29,7 @@ dependencies = [
     "sacremoses>=0.1.1",
     "scanpy>=1.11.3",
     "seaborn>=0.13.2",
-    "transformers==4.52.3",
+    "transformers>=4.52.3",
     "httpx>=0.28.1",
     "scikit-survival>=0.24.1",
     "torchsurv>=0.1.5",
@@ -44,12 +44,15 @@ dependencies = [
     "pandas<3.0",
 ]
 
+[tool.uv]
+prerelease = "allow"
+
 [tool.uv.sources]
-wsidata = { git = "https://github.com/rendeirolab/wsidata", branch = "main" }
-lazyslide = { git = "https://github.com/rendeirolab/lazyslide", branch = "main" }
+# wsidata = { git = "https://github.com/rendeirolab/wsidata", branch = "main" }
+# lazyslide = { git = "https://github.com/rendeirolab/lazyslide", branch = "main" }
 conch = { git = "https://github.com/mahmoodlab/CONCH.git" }
 
 [dependency-groups]
 dev = [
-    "pre-commit>=4.2.0",
+    "prek",
 ]
