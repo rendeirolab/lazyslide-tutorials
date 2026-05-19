@@ -48,8 +48,8 @@ dependencies = [
 prerelease = "allow"
 
 [tool.uv.sources]
-# wsidata = { git = "https://github.com/rendeirolab/wsidata", branch = "main" }
-# lazyslide = { git = "https://github.com/rendeirolab/lazyslide", branch = "main" }
+wsidata = { git = "https://github.com/rendeirolab/wsidata", branch = "main" }
+lazyslide = { git = "https://github.com/rendeirolab/lazyslide", branch = "main" }
 conch = { git = "https://github.com/mahmoodlab/CONCH.git" }
 
 [dependency-groups]
