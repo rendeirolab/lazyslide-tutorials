@@ -46,9 +46,6 @@ dependencies = [
     "open-clip-torch>=3.3.0",
 ]
 
-[tool.uv]
-prerelease = "allow"
-
 [tool.uv.sources]
 wsidata = { git = "https://github.com/rendeirolab/wsidata", branch = "main" }
 lazyslide = { git = "https://github.com/rendeirolab/lazyslide", branch = "main" }
