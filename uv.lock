@@ -2169,7 +2169,7 @@ dependencies = [
 [[package]]
 name = "lazyslide-models"
 version = "0.0.2"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/rendeirolab/lazyslide-models?branch=main#eccd0477fd97a66ec16ae475121eaa6adea7ce73" }
 dependencies = [
     { name = "numpy" },
     { name = "opencv-python-headless" },
@@ -2180,10 +2180,6 @@ dependencies = [
     { name = "timm" },
     { name = "torch" },
     { name = "transformers" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e1/dc/8531dac8f13145b19b648c0bd8fdb3768d3ad7eac7984cd2c8fddb09a1c6/lazyslide_models-0.0.2.tar.gz", hash = "sha256:8bed15fa3066a6f669d958420af64c8037ad4d9af770a7362de3299f3279e25b", size = 219735, upload-time = "2026-05-14T17:16:11.353Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/4c/fd/f1f7e39857ba013447623b3f7b1582c5f1c86803b23c050cab5da1e99028/lazyslide_models-0.0.2-py3-none-any.whl", hash = "sha256:26c4bc5a7af33f025086e90f64abb1ac87467d50438f3c41d0d370ed43f2f062", size = 81671, upload-time = "2026-05-14T17:16:10.219Z" },
 ]
 
 [[package]]
@@ -2210,6 +2206,7 @@ dependencies = [
     { name = "jupyter-cache" },
     { name = "jupytext" },
     { name = "lazyslide" },
+    { name = "lazyslide-models" },
     { name = "lightning" },
     { name = "marsilea" },
     { name = "mofapy2" },
@@ -2217,6 +2214,7 @@ dependencies = [
     { name = "muon" },
     { name = "nbconvert" },
     { name = "ome-zarr" },
+    { name = "open-clip-torch" },
     { name = "pandas" },
     { name = "protobuf" },
     { name = "pydeseq2" },
@@ -2256,6 +2254,7 @@ requires-dist = [
     { name = "jupyter-cache", specifier = ">=1.0.1" },
     { name = "jupytext", specifier = ">=1.17.2" },
     { name = "lazyslide", git = "https://github.com/rendeirolab/lazyslide?branch=main" },
+    { name = "lazyslide-models", git = "https://github.com/rendeirolab/lazyslide-models?branch=main" },
     { name = "lightning", specifier = ">=2.5.5" },
     { name = "marsilea", specifier = ">=0.5.3" },
     { name = "mofapy2", specifier = ">=0.7.2" },
@@ -2263,6 +2262,7 @@ requires-dist = [
     { name = "muon", specifier = ">=0.1.7" },
     { name = "nbconvert", specifier = ">=7.16.6" },
     { name = "ome-zarr", specifier = "==0.13.0" },
+    { name = "open-clip-torch", specifier = ">=3.3.0" },
     { name = "pandas", specifier = "<3.0" },
     { name = "protobuf", specifier = ">=6.31.1" },
     { name = "pydeseq2", specifier = ">=0.5.2" },
@@ -3304,6 +3304,25 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/b5/13/566a1a84b88aad11dea5d920b665eeea0df0885b312a4e1b706885ae50ae/ome_zarr-0.13.0.tar.gz", hash = "sha256:29c0ab52045c1b9d3037444dab691876591ec1db74c4a01e10cb0f0f4288a6e5", size = 71802, upload-time = "2026-02-06T14:00:57.619Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/47/f8/9d2945ef9a64de619f52158b8bd27eecad971ff327139b8082796319f858/ome_zarr-0.13.0-py3-none-any.whl", hash = "sha256:895e9530bc81c487a6281644a16b2888ca8d992685ec116bb529a5386aa7d4a2", size = 42109, upload-time = "2026-02-06T14:00:56.646Z" },
+]
+
+[[package]]
+name = "open-clip-torch"
+version = "3.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "ftfy" },
+    { name = "huggingface-hub" },
+    { name = "regex" },
+    { name = "safetensors" },
+    { name = "timm" },
+    { name = "torch" },
+    { name = "torchvision" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4a/1f/2bc9795047fa2c1ad2567ef78ce6dfc9a7b763fa534acee09a94da2a5b8f/open_clip_torch-3.3.0.tar.gz", hash = "sha256:904b1a9f909df8281bb3de60ab95491cd2994a509177ea4f9d6292a84fe24d6d", size = 1503380, upload-time = "2026-02-27T00:32:46.74Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/37/b5/41c315ccd94ca332ead3e832e83eee343ab245005c3e43d9d3e75eae34eb/open_clip_torch-3.3.0-py3-none-any.whl", hash = "sha256:c549ad5ed6bfc119cc11105033c0a2b9d7a2a4afeb40a58a09aab3da1a0043ce", size = 1547268, upload-time = "2026-02-27T00:32:44.902Z" },
 ]
 
 [[package]]

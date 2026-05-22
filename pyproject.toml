@@ -18,6 +18,7 @@ dependencies = [
     "jupyter-cache>=1.0.1",
     "jupytext>=1.17.2",
     "lazyslide",
+    "lazyslide-models",
     "wsidata",
     "marsilea>=0.5.3",
     "mofapy2>=0.7.2",
@@ -42,6 +43,7 @@ dependencies = [
     "accelerate>=1.12.0",
     "ome-zarr==0.13.0",
     "pandas<3.0",
+    "open-clip-torch>=3.3.0",
 ]
 
 [tool.uv]
@@ -50,6 +52,7 @@ prerelease = "allow"
 [tool.uv.sources]
 wsidata = { git = "https://github.com/rendeirolab/wsidata", branch = "main" }
 lazyslide = { git = "https://github.com/rendeirolab/lazyslide", branch = "main" }
+lazyslide-models = { git = "https://github.com/rendeirolab/lazyslide-models", branch = "main" }
 conch = { git = "https://github.com/mahmoodlab/CONCH.git" }
 
 [dependency-groups]

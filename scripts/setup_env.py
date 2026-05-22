@@ -43,13 +43,18 @@ def setup_data():
 
 
 def setup_models():
-    from lazyslide.models.multimodal import Prism, PLIP
-    from lazyslide.models.segmentation import PathProfilerTissueSegmentation, Instanseg
+    from lazyslide_models.multimodal import Prism, PLIP
+    from lazyslide_models.segmentation import (
+        PathProfilerTissueSegmentation,
+        Instanseg,
+        HistoPLUS,
+    )
 
     _ = Prism()
     _ = PLIP()
     _ = PathProfilerTissueSegmentation()
     _ = Instanseg()
+    _ = HistoPLUS()
 
 
 def setup_sample_data():
