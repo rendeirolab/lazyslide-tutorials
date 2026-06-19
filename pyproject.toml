@@ -34,6 +34,7 @@ dependencies = [
     "httpx>=0.28.1",
     "scikit-survival>=0.24.1",
     "torchsurv>=0.1.5",
+    "torchstain[torch]>=1.4.1",
     "dask-labextension>=7.0.0",
     "einops>=0.8.1",
     "einops-exts>=0.0.4",

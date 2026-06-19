@@ -3,14 +3,18 @@ on:
   pull_request:
     paths:
       - ".github/workflows/build_notebooks.yaml"
+      - "scripts/setup_env.py"
       - "tutorials/**"
       - "pyproject.toml"
+      - "uv.lock"
   push:
     branches: [main]
     paths:
       - ".github/workflows/build_notebooks.yaml"
+      - "scripts/setup_env.py"
       - "tutorials/**"
       - "pyproject.toml"
+      - "uv.lock"
   workflow_dispatch:
 
 concurrency:
@@ -20,6 +24,10 @@ concurrency:
 jobs:
   runnbs:
     runs-on: linux-cpu16-600g
+    env:
+      HF_HOME: ${{ github.workspace }}/.cache/huggingface
+      HF_HUB_DISABLE_TELEMETRY: 1
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
     permissions:
       contents: write # Allow GH actions to push changes to repo
     steps:
@@ -36,21 +44,55 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Install project
         run: uv sync --dev --upgrade
-      - name: Login to Hugging Face
-        run: uv run hf auth login --token ${{ secrets.HF_TOKEN }}
-      - name: Cache notebooks
-        uses: actions/cache@v5
-        env:
-          # Increase this value to reset cache if env file has not changed
-          CACHE_NUMBER: 0
+      - name: Restore model and dataset cache
+        id: artifact-cache
+        uses: actions/cache/restore@v5
         with:
-          path: .jupyter_cache
-          # Bust cache when deps or notebooks change (or when CACHE_NUMBER increments)
-          key: ${{ runner.os }}-jcache-${{ env.CACHE_NUMBER }}-${{ hashFiles('uv.lock') }}-${{ github.sha }}
+          path: .cache/huggingface
+          key: ${{ runner.os }}-hf-v1-${{ hashFiles('scripts/setup_env.py', 'uv.lock') }}
           restore-keys: |
-            ${{ runner.os }}-jcache-${{ env.CACHE_NUMBER }}-${{ hashFiles('uv.lock') }}-
+            ${{ runner.os }}-hf-v1-
+
       - name: Setup data
         run: uv run scripts/setup_env.py
+
+      # Save before notebook execution so extracted or modified tutorial data
+      # cannot contaminate the reusable download cache.
+      - name: Save model and dataset cache
+        if: steps.artifact-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v5
+        with:
+          path: .cache/huggingface
+          key: ${{ steps.artifact-cache.outputs.cache-primary-key }}
+
+      - name: Verify model and dataset cache offline
+        env:
+          HF_HUB_OFFLINE: 1
+          HF_DATASETS_OFFLINE: 1
+          TRANSFORMERS_OFFLINE: 1
+        run: uv run scripts/setup_env.py
+
+      - name: Compute notebook source hash
+        id: notebook-source
+        shell: bash
+        run: |
+          hash="$({
+            find tutorials -maxdepth 1 -name '*.ipynb' -print0 \
+              | sort -z \
+              | xargs -0 -r jq -c \
+                  '{kernelspec: .metadata.kernelspec, cells: [.cells[] | {cell_type, metadata, source}]}'
+          } | sha256sum | cut -d' ' -f1)"
+          echo "hash=$hash" >> "$GITHUB_OUTPUT"
+
+      - name: Cache notebooks
+        uses: actions/cache@v5
+        with:
+          path: .jupyter_cache
+          key: ${{ runner.os }}-jcache-v1-${{ hashFiles('uv.lock') }}-${{ steps.notebook-source.outputs.hash }}
+          restore-keys: |
+            ${{ runner.os }}-jcache-v1-${{ hashFiles('uv.lock') }}-
+            ${{ runner.os }}-jcache-v1-
+
       - name: execute notebooks
         run: |
           mkdir -p .jupyter_cache
