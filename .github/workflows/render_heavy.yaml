@@ -1,0 +1,99 @@
+name: Render heavy notebooks
+
+# Notebooks in tutorials/heavy/ pull large slide sets and need a GPU and a big
+# disk, so they render on Hugging Face Jobs, and only when started by hand.
+# The executed notebook comes back through an HF bucket and is committed to
+# the branch this workflow was started on.
+on:
+  workflow_dispatch:
+    inputs:
+      notebook:
+        description: Notebook in tutorials/heavy/
+        type: string
+        default: multiple_slides.ipynb
+      flavor:
+        description: HF Jobs hardware
+        type: choice
+        options:
+          - l4x1
+          - l4x4
+          - l40sx1
+          - a100-large
+        default: l4x1
+      timeout:
+        description: HF Job timeout, e.g. 3h (this GitHub job stops at 6h)
+        type: string
+        default: 3h
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.notebook }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    permissions:
+      contents: write
+    env:
+      BUCKET: RendeiroLab/lazyslide-tutorials-renders
+      NOTEBOOK: tutorials/heavy/${{ inputs.notebook }}
+      FLAVOR: ${{ inputs.flavor }}
+      JOB_TIMEOUT: ${{ inputs.timeout }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Render on Hugging Face Jobs
+        id: render
+        run: |
+          set -euo pipefail
+          test -f "${NOTEBOOK}" || { echo "${NOTEBOOK} not found" >&2; exit 1; }
+          # --detach stdout is a human banner; the Job ID is the 24-char hex.
+          JOB_OUT="$(uvx --from huggingface_hub hf jobs run \
+            --detach \
+            --namespace RendeiroLab \
+            --name lazyslide-tutorials-render \
+            --flavor "${FLAVOR}" \
+            --timeout "${JOB_TIMEOUT}" \
+            --secrets HF_TOKEN \
+            --env "CI_SHA=${GITHUB_SHA}" \
+            --env "NOTEBOOK=${NOTEBOOK}" \
+            --env "OUT_DIR=/out/${GITHUB_RUN_ID}" \
+            --volume "hf://buckets/${BUCKET}:/out" \
+            nvidia/cuda:13.0.1-runtime-ubuntu24.04 \
+            bash -c "$(cat scripts/hf_render.sh)")"
+          JOB_ID="$(printf '%s\n' "${JOB_OUT}" | grep -Eo '[a-fA-F0-9]{24}' | head -1)"
+          if [ -z "${JOB_ID}" ]; then
+            echo "hf jobs run --detach did not print a Job ID (got: ${JOB_OUT})" >&2
+            exit 1
+          fi
+          echo "job_ref=RendeiroLab/${JOB_ID}" >> "${GITHUB_OUTPUT}"
+          echo "https://huggingface.co/jobs/RendeiroLab/${JOB_ID}"
+          # A long log stream can drop; wait decides the outcome.
+          uvx --from huggingface_hub hf jobs logs -f "RendeiroLab/${JOB_ID}" || true
+          uvx --from huggingface_hub hf jobs wait "RendeiroLab/${JOB_ID}"
+
+      # Cancelling this run would otherwise leave the GPU Job billing until
+      # its own timeout.
+      - name: Cancel the HF Job
+        if: cancelled() && steps.render.outputs.job_ref != ''
+        run: uvx --from huggingface_hub hf jobs cancel "${{ steps.render.outputs.job_ref }}"
+
+      # Pull first so a commit that landed during the render does not reject
+      # the push.
+      - name: Fetch the executed notebook
+        run: |
+          set -euo pipefail
+          git pull --ff-only
+          uvx --from huggingface_hub hf buckets cp \
+            "hf://buckets/${BUCKET}/${GITHUB_RUN_ID}/$(basename "${NOTEBOOK}")" \
+            "${NOTEBOOK}"
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Render ${{ inputs.notebook }} on HF Jobs
+          file_pattern: tutorials/heavy/*.ipynb
