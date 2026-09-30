@@ -42,8 +42,10 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
+      # Third-party deps come from uv.lock. Bump them on purpose with
+      # `uv lock --upgrade` in a PR. The in-house packages track main.
       - name: Install project
-        run: uv sync --dev --upgrade
+        run: uv sync --dev --upgrade-package lazyslide --upgrade-package wsidata --upgrade-package lazyslide-models
       - name: Restore model and dataset cache
         id: artifact-cache
         uses: actions/cache/restore@v5

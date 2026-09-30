@@ -7,6 +7,9 @@ resolution-markers = [
     "python_full_version < '3.13'",
 ]
 
+[manifest]
+overrides = [{ name = "torch", specifier = ">=2.1" }]
+
 [[package]]
 name = "accelerate"
 version = "1.14.0"
@@ -2198,8 +2201,8 @@ wheels = [
 
 [[package]]
 name = "lazyslide"
-version = "0.11.1.post8.dev0+6faca48"
-source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#6faca484ebd6ad1bb0592a63d682362c45827795" }
+version = "0.12.0.post18.dev0+4f8dccc"
+source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#4f8dccc8be680d51bbe2e1a25af5d24f277c5d7a" }
 dependencies = [
     { name = "cyclopts" },
     { name = "lazyslide-models" },
@@ -2218,8 +2221,8 @@ dependencies = [
 
 [[package]]
 name = "lazyslide-models"
-version = "0.0.4"
-source = { git = "https://github.com/rendeirolab/lazyslide-models.git?branch=main#0127beb5ff7989005f0eff7b481a95b989c4187f" }
+version = "0.0.4.post39.dev0+67bcc3c"
+source = { git = "https://github.com/rendeirolab/lazyslide-models.git?branch=main#67bcc3cc0cba7113e200b3429ac4f06604502af9" }
 dependencies = [
     { name = "numpy" },
     { name = "opencv-python-headless" },
@@ -5890,8 +5893,8 @@ wheels = [
 
 [[package]]
 name = "wsidata"
-version = "0.10.1.post1.dev0+8811775"
-source = { git = "https://github.com/rendeirolab/wsidata?branch=main#8811775c67672126791c87c2da516eb1b0eb008a" }
+version = "0.11.1.post4.dev0+dc407f5"
+source = { git = "https://github.com/rendeirolab/wsidata?branch=main#dc407f539481cdedd16ad96d4d7d62e4623b3ea2" }
 dependencies = [
     { name = "opencv-python-headless" },
     { name = "openslide-bin" },
