@@ -47,15 +47,8 @@ dependencies = [
     "open-clip-torch>=3.3.0",
 ]
 
-[tool.uv]
-# wsidata main sends torch to the PyTorch CPU index on Linux (wsidata#69), and
-# uv applies that to git installs. torchvision still comes from PyPI, so the
-# builds mismatch ("operator torchvision::nms does not exist"). Overriding
-# torch drops wsidata's torch source. Remove once wsidata stops setting it.
-override-dependencies = ["torch>=2.1"]
-
 [tool.uv.sources]
-wsidata ={ git = "https://github.com/rendeirolab/wsidata", branch = "main" }
+wsidata = { git = "https://github.com/rendeirolab/wsidata", branch = "main" }
 lazyslide = { git = "https://github.com/rendeirolab/lazyslide", branch = "main" }
 lazyslide-models = { git = "https://github.com/rendeirolab/lazyslide-models", branch = "main" }
 conch = { git = "https://github.com/mahmoodlab/CONCH.git" }
