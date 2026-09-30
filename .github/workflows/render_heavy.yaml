@@ -52,7 +52,8 @@ jobs:
         run: |
           set -euo pipefail
           test -f "${NOTEBOOK}" || { echo "${NOTEBOOK} not found" >&2; exit 1; }
-          # --detach stdout is a human banner; the Job ID is the 24-char hex.
+          # --detach prints "id=<Job ID> name=... url=..." on stdout. The
+          # config banner on stderr holds the commit SHA, which is hex too.
           JOB_OUT="$(uvx --from huggingface_hub hf jobs run \
             --detach \
             --namespace RendeiroLab \
@@ -66,7 +67,7 @@ jobs:
             --volume "hf://buckets/${BUCKET}:/out" \
             nvidia/cuda:13.0.1-runtime-ubuntu24.04 \
             bash -c "$(cat scripts/hf_render.sh)")"
-          JOB_ID="$(printf '%s\n' "${JOB_OUT}" | grep -Eo '[a-fA-F0-9]{24}' | head -1)"
+          JOB_ID="$(printf '%s\n' "${JOB_OUT}" | grep -Eo 'id=[a-fA-F0-9]{24}' | head -1 | cut -d= -f2)"
           if [ -z "${JOB_ID}" ]; then
             echo "hf jobs run --detach did not print a Job ID (got: ${JOB_OUT})" >&2
             exit 1
