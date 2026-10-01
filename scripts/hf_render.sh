@@ -42,6 +42,11 @@ git checkout --force FETCH_HEAD
 uv sync --locked
 uv run --no-sync python -c "import torch; assert torch.cuda.is_available(), 'CUDA not available'; print(torch.cuda.get_device_name(0))"
 
+# Keep library warnings and download bars, including those from dask
+# workers, out of the rendered notebook.
+export PYTHONWARNINGS="${PYTHONWARNINGS:-ignore}"
+export HF_HUB_DISABLE_PROGRESS_BARS="${HF_HUB_DISABLE_PROGRESS_BARS:-1}"
+
 # No per-cell timeout: the job's --timeout caps the whole render.
 uv run --no-sync jupyter nbconvert --to notebook --execute --inplace \
   --ExecutePreprocessor.timeout=-1 \
