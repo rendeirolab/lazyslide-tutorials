@@ -970,6 +970,23 @@ wheels = [
 ]
 
 [[package]]
+name = "deepspotm"
+version = "1.0.0"
+source = { git = "https://github.com/ratschlab/DeepSpotM.git#4d7793c890c500f51033444cc755f02b9d523628" }
+dependencies = [
+    { name = "huggingface-hub" },
+    { name = "lightning" },
+    { name = "numpy" },
+    { name = "pandas" },
+    { name = "peft" },
+    { name = "pillow" },
+    { name = "safetensors" },
+    { name = "timm" },
+    { name = "torch" },
+    { name = "transformers" },
+]
+
+[[package]]
 name = "defusedxml"
 version = "0.7.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2198,8 +2215,8 @@ wheels = [
 
 [[package]]
 name = "lazyslide"
-version = "0.11.1.post8.dev0+6faca48"
-source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#6faca484ebd6ad1bb0592a63d682362c45827795" }
+version = "0.12.0.post18.dev0+4f8dccc"
+source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#4f8dccc8be680d51bbe2e1a25af5d24f277c5d7a" }
 dependencies = [
     { name = "cyclopts" },
     { name = "lazyslide-models" },
@@ -2218,8 +2235,8 @@ dependencies = [
 
 [[package]]
 name = "lazyslide-models"
-version = "0.0.4"
-source = { git = "https://github.com/rendeirolab/lazyslide-models.git?branch=main#0127beb5ff7989005f0eff7b481a95b989c4187f" }
+version = "0.0.4.post39.dev0+67bcc3c"
+source = { git = "https://github.com/rendeirolab/lazyslide-models.git?branch=main#67bcc3cc0cba7113e200b3429ac4f06604502af9" }
 dependencies = [
     { name = "numpy" },
     { name = "opencv-python-headless" },
@@ -2244,6 +2261,7 @@ dependencies = [
     { name = "dask-jobqueue" },
     { name = "dask-labextension" },
     { name = "decoupler" },
+    { name = "deepspotm" },
     { name = "diffusers" },
     { name = "einops" },
     { name = "einops-exts" },
@@ -2293,6 +2311,7 @@ requires-dist = [
     { name = "dask-jobqueue", specifier = ">=0.9.0" },
     { name = "dask-labextension", specifier = ">=7.0.0" },
     { name = "decoupler", specifier = ">=2.1.1" },
+    { name = "deepspotm", git = "https://github.com/ratschlab/DeepSpotM.git" },
     { name = "diffusers", specifier = ">=0.36.0" },
     { name = "einops", specifier = ">=0.8.1" },
     { name = "einops-exts", specifier = ">=0.0.4" },
@@ -3580,6 +3599,27 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/be/44/ed13eccdd0519eff265f44b670d46fbb0ec813e2274932dc1c0e48520f7d/patsy-1.0.2.tar.gz", hash = "sha256:cdc995455f6233e90e22de72c37fcadb344e7586fb83f06696f54d92f8ce74c0", size = 399942, upload-time = "2025-10-20T16:17:37.535Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f1/70/ba4b949bdc0490ab78d545459acd7702b211dfccf7eb89bbc1060f52818d/patsy-1.0.2-py2.py3-none-any.whl", hash = "sha256:37bfddbc58fcf0362febb5f54f10743f8b21dd2aa73dec7e7ef59d1b02ae668a", size = 233301, upload-time = "2025-10-20T16:17:36.563Z" },
+]
+
+[[package]]
+name = "peft"
+version = "0.21.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "accelerate" },
+    { name = "huggingface-hub" },
+    { name = "numpy" },
+    { name = "packaging" },
+    { name = "psutil" },
+    { name = "pyyaml" },
+    { name = "safetensors" },
+    { name = "torch" },
+    { name = "tqdm" },
+    { name = "transformers" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/45/e4/e0277d952d2500980c5c7e52b2910e795a3cca0580b944b8f44063439fed/peft-0.21.1.tar.gz", hash = "sha256:95f239f84da1919a6d0c64c4049650a6a79804e3a87c78f35c597da771e31f68", size = 983017, upload-time = "2026-09-29T09:23:21.548Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/10/48/4a18f117e05d0bcc3236a6c064c78f5b8c5b5248055a34f6940e7304def6/peft-0.21.1-py3-none-any.whl", hash = "sha256:6b99d659a33acc17295c0838f1e58267337b8c30ac9aef0c8f2d48364d3f24e2", size = 835387, upload-time = "2026-09-29T09:23:17.798Z" },
 ]
 
 [[package]]
@@ -5890,8 +5930,8 @@ wheels = [
 
 [[package]]
 name = "wsidata"
-version = "0.10.1.post1.dev0+8811775"
-source = { git = "https://github.com/rendeirolab/wsidata?branch=main#8811775c67672126791c87c2da516eb1b0eb008a" }
+version = "0.11.1.post5.dev0+d797633"
+source = { git = "https://github.com/rendeirolab/wsidata?branch=main#d7976332b6b7511cefc62dc9b1748b9aa701136d" }
 dependencies = [
     { name = "opencv-python-headless" },
     { name = "openslide-bin" },
