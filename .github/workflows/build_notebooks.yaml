@@ -96,6 +96,11 @@ jobs:
             ${{ runner.os }}-jcache-v1-
 
       - name: execute notebooks
+        env:
+          # Keep library warnings and download bars out of the rendered pages.
+          # Kernels and dask workers inherit both.
+          PYTHONWARNINGS: ignore
+          HF_HUB_DISABLE_PROGRESS_BARS: 1
         run: |
           mkdir -p .jupyter_cache
 
