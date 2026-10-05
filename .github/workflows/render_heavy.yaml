@@ -20,9 +20,18 @@ on:
           - l40sx1
           - a100-large
         default: l4x1
+      # This GitHub job stops at 6h. Capping the HF Job at 5h keeps it ending
+      # first, so a cancelled run can still cancel the Job and a finished one
+      # can still commit.
       timeout:
-        description: HF Job timeout, e.g. 3h (this GitHub job stops at 6h)
-        type: string
+        description: HF Job timeout
+        type: choice
+        options:
+          - 1h
+          - 2h
+          - 3h
+          - 4h
+          - 5h
         default: 3h
 
 concurrency:
@@ -85,11 +94,16 @@ jobs:
         run: uvx --from huggingface_hub hf jobs cancel "${{ steps.render.outputs.job_ref }}"
 
       # Pull first so a commit that landed during the render does not reject
-      # the push.
+      # the push. The Job rendered the notebook as it was at GITHUB_SHA, so
+      # stop if the notebook changed since then rather than overwrite it.
       - name: Fetch the executed notebook
         run: |
           set -euo pipefail
           git pull --ff-only
+          if ! git diff --quiet "${GITHUB_SHA}" HEAD -- "${NOTEBOOK}"; then
+            echo "${NOTEBOOK} changed on this branch during the render. Start the workflow again." >&2
+            exit 1
+          fi
           uvx --from huggingface_hub hf buckets cp \
             "hf://buckets/${BUCKET}/${GITHUB_RUN_ID}/$(basename "${NOTEBOOK}")" \
             "${NOTEBOOK}"

@@ -29,9 +29,10 @@ if ! command -v uv >/dev/null 2>&1; then
   export PATH="${HOME}/.local/bin:${PATH}"
 fi
 # Pin 3.12, the Python the regular render uses, so uv does not pick a newer
-# one that some locked package has no wheel for.
+# one that some locked package has no wheel for. Name it in the install too:
+# an older uv already in the image may not read UV_PYTHON there.
 export UV_PYTHON="${UV_PYTHON:-3.12}"
-uv python install
+uv python install "${UV_PYTHON}"
 
 git clone --filter=blob:none "${REPO_URL}" "${WORKDIR}"
 cd "${WORKDIR}"
