@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Payload for Hugging Face Jobs: render one heavy notebook on a GPU and copy
 # the executed notebook to OUT_DIR, a bucket mount. render_heavy.yaml and a
-# laptop both launch it with:
-#   hf jobs run ... IMAGE bash -c "$(cat scripts/hf_render.sh)"
+# laptop both launch it in the RendeiroLab namespace, so the Job runs and is
+# billed under the org, not a personal account:
+#   hf jobs run --namespace RendeiroLab ... IMAGE bash -c "$(cat scripts/hf_render.sh)"
 #
 # Required env:
 #   CI_SHA       git commit to render
