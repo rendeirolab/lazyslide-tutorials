@@ -5,6 +5,8 @@ on:
       - ".github/workflows/build_notebooks.yaml"
       - "scripts/setup_env.py"
       - "tutorials/**"
+      # Heavy notebooks render on HF Jobs (render_heavy.yaml).
+      - "!tutorials/heavy/**"
       - "pyproject.toml"
       - "uv.lock"
   push:
@@ -13,6 +15,8 @@ on:
       - ".github/workflows/build_notebooks.yaml"
       - "scripts/setup_env.py"
       - "tutorials/**"
+      # Heavy notebooks render on HF Jobs (render_heavy.yaml).
+      - "!tutorials/heavy/**"
       - "pyproject.toml"
       - "uv.lock"
   workflow_dispatch:
