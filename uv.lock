@@ -2203,8 +2203,8 @@ wheels = [
 
 [[package]]
 name = "lazyslide"
-version = "0.13.0.post2.dev0+397be8e"
-source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#397be8e8ee8e577e20d6143aaeca7fa87e51a94b" }
+version = "0.13.0.post3.dev0+2aea22b"
+source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#2aea22bcbd8368a2df52a59719b2b0a200ccae11" }
 dependencies = [
     { name = "huggingface-hub" },
     { name = "lazyslide-models" },
