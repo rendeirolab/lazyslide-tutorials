@@ -63,6 +63,7 @@ MODEL_REPOSITORIES: tuple[str, ...] = (
     "paige-ai/Virchow",
     "bioptimus/H0-mini",
     "timm/resnet50.a1_in1k",
+    "ratschlab/DeepSpotM",
 )
 
 # Repositories that also hold files no tutorial reads. CytoSyn ships about
