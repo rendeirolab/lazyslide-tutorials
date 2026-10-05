@@ -5,6 +5,8 @@ on:
       - ".github/workflows/build_notebooks.yaml"
       - "scripts/setup_env.py"
       - "tutorials/**"
+      # Heavy notebooks render on HF Jobs (render_heavy.yaml).
+      - "!tutorials/heavy/**"
       - "pyproject.toml"
       - "uv.lock"
   push:
@@ -13,6 +15,8 @@ on:
       - ".github/workflows/build_notebooks.yaml"
       - "scripts/setup_env.py"
       - "tutorials/**"
+      # Heavy notebooks render on HF Jobs (render_heavy.yaml).
+      - "!tutorials/heavy/**"
       - "pyproject.toml"
       - "uv.lock"
   workflow_dispatch:
@@ -42,8 +46,10 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
+      # Third-party deps come from uv.lock. Bump them on purpose with
+      # `uv lock --upgrade` in a PR. The in-house packages track main.
       - name: Install project
-        run: uv sync --dev --upgrade
+        run: uv sync --dev --upgrade-package lazyslide --upgrade-package wsidata --upgrade-package lazyslide-models
       - name: Restore model and dataset cache
         id: artifact-cache
         uses: actions/cache/restore@v5
@@ -94,6 +100,11 @@ jobs:
             ${{ runner.os }}-jcache-v1-
 
       - name: execute notebooks
+        env:
+          # Keep library warnings and download bars out of the rendered pages.
+          # Kernels and dask workers inherit both.
+          PYTHONWARNINGS: ignore
+          HF_HUB_DISABLE_PROGRESS_BARS: 1
         run: |
           mkdir -p .jupyter_cache
 

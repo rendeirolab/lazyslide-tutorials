@@ -42,9 +42,9 @@ dependencies = [
     "spatialdata-plot>=0.2.12",
     "diffusers>=0.36.0",
     "accelerate>=1.12.0",
-    "ome-zarr==0.13.0",
     "pandas<3.0",
     "open-clip-torch>=3.3.0",
+    "deepspotm",
 ]
 
 [tool.uv.sources]
@@ -52,6 +52,7 @@ wsidata = { git = "https://github.com/rendeirolab/wsidata", branch = "main" }
 lazyslide = { git = "https://github.com/rendeirolab/lazyslide", branch = "main" }
 lazyslide-models = { git = "https://github.com/rendeirolab/lazyslide-models", branch = "main" }
 conch = { git = "https://github.com/mahmoodlab/CONCH.git" }
+deepspotm = { git = "https://github.com/ratschlab/DeepSpotM.git" }
 
 [dependency-groups]
 dev = [

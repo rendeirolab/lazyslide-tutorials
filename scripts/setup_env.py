@@ -63,7 +63,14 @@ MODEL_REPOSITORIES: tuple[str, ...] = (
     "paige-ai/Virchow",
     "bioptimus/H0-mini",
     "timm/resnet50.a1_in1k",
+    "ratschlab/DeepSpotM",
 )
+
+# Repositories that also hold files no tutorial reads. CytoSyn ships about
+# 21 GB of synthetic samples and training tables next to its 3 GB model.
+SNAPSHOT_IGNORE: dict[str, tuple[str, ...]] = {
+    "Owkin-Bioptimus/CytoSyn": ("synthetic_samples/*", "data/*"),
+}
 
 _OFFLINE_VALUES = {"1", "ON", "TRUE", "YES"}
 
@@ -122,7 +129,11 @@ def setup_models() -> None:
 
     for repo_id in MODEL_REPOSITORIES:
         print(f"Prefetching model repository {repo_id}")
-        snapshot_download(repo_id=repo_id, local_files_only=is_offline())
+        snapshot_download(
+            repo_id=repo_id,
+            local_files_only=is_offline(),
+            ignore_patterns=SNAPSHOT_IGNORE.get(repo_id),
+        )
 
 
 def main() -> None:

@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.12"
 resolution-markers = [
     "python_full_version >= '3.14'",
@@ -758,34 +758,34 @@ wheels = [
 
 [package.optional-dependencies]
 cudart = [
-    { name = "nvidia-cuda-runtime", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "nvidia-cuda-runtime" },
 ]
 cufft = [
-    { name = "nvidia-cufft", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "nvidia-cufft" },
 ]
 cufile = [
-    { name = "nvidia-cufile", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-cufile" },
 ]
 cupti = [
-    { name = "nvidia-cuda-cupti", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "nvidia-cuda-cupti" },
 ]
 curand = [
-    { name = "nvidia-curand", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "nvidia-curand" },
 ]
 cusolver = [
-    { name = "nvidia-cusolver", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "nvidia-cusolver" },
 ]
 cusparse = [
-    { name = "nvidia-cusparse", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "nvidia-cusparse" },
 ]
 nvjitlink = [
-    { name = "nvidia-nvjitlink", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "nvidia-nvjitlink" },
 ]
 nvrtc = [
-    { name = "nvidia-cuda-nvrtc", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "nvidia-cuda-nvrtc" },
 ]
 nvtx = [
-    { name = "nvidia-nvtx", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "nvidia-nvtx" },
 ]
 
 [[package]]
@@ -795,21 +795,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/a9/95/a3dbbb5028f35eafb79008e7522a75244477d2838f38cbb722248dabc2a8/cycler-0.12.1.tar.gz", hash = "sha256:88bb128f02ba341da8ef447245a9e138fae777f6a23943da4540077d3601eb1c", size = 7615, upload-time = "2023-10-07T05:32:18.335Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e7/05/c19819d5e3d95294a6f5947fb9b9629efb316b96de511b418c53d245aae6/cycler-0.12.1-py3-none-any.whl", hash = "sha256:85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30", size = 8321, upload-time = "2023-10-07T05:32:16.783Z" },
-]
-
-[[package]]
-name = "cyclopts"
-version = "4.18.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "attrs" },
-    { name = "docstring-parser" },
-    { name = "rich" },
-    { name = "rich-rst" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/9a/19/5c438b428b3dca208eb920804dc16aeb3ca1e85d6163d17e8fb0785ead19/cyclopts-4.18.0.tar.gz", hash = "sha256:fb7b730f21932e0784f7e54462df0447aaa1fbf034d65b605bd8a25dce58b188", size = 182821, upload-time = "2026-06-11T19:55:05.326Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/5d/9f/b67f14c6b686ca90d317c0358f1a52ae171f43f83c808683fae3ba0b1f90/cyclopts-4.18.0-py3-none-any.whl", hash = "sha256:18ba2912e48e890a97ecc8a05c9beddf30a407b43f4e14cccfd40efddc41f029", size = 221216, upload-time = "2026-06-11T19:55:03.773Z" },
 ]
 
 [[package]]
@@ -970,12 +955,41 @@ wheels = [
 ]
 
 [[package]]
+name = "deepspotm"
+version = "1.0.0"
+source = { git = "https://github.com/ratschlab/DeepSpotM.git#4d7793c890c500f51033444cc755f02b9d523628" }
+dependencies = [
+    { name = "huggingface-hub" },
+    { name = "lightning" },
+    { name = "numpy" },
+    { name = "pandas" },
+    { name = "peft" },
+    { name = "pillow" },
+    { name = "safetensors" },
+    { name = "timm" },
+    { name = "torch" },
+    { name = "transformers" },
+]
+
+[[package]]
 name = "defusedxml"
 version = "0.7.1"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/0f/d5/c66da9b79e5bdb124974bfe172b4daf3c984ebd9c2a06e2b8a4dc7331c72/defusedxml-0.7.1.tar.gz", hash = "sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69", size = 75520, upload-time = "2021-03-08T10:59:26.269Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/07/6c/aa3f2f849e01cb6a001cd8554a88d4c77c5c1a31c95bdf1cf9301e6d9ef4/defusedxml-0.7.1-py2.py3-none-any.whl", hash = "sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61", size = 25604, upload-time = "2021-03-08T10:59:24.45Z" },
+]
+
+[[package]]
+name = "deprecated"
+version = "3.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "wrapt" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f7/9c/16649913bf14c73e0a9453782e148362ff2657067deff6aa9c7ebcddcc31/deprecated-3.0.0.tar.gz", hash = "sha256:16850204d3a1e6bb0acd06bff48d96e8b0a0d25d1c52f71705405a0f4894192d", size = 166912, upload-time = "2026-09-26T13:58:10.675Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/83/ae/676feae8e4644a6d7169951a97f61c56f416c73f67bf1761f2461d75cc81/deprecated-3.0.0-py3-none-any.whl", hash = "sha256:58204cf4a7f6270d547af5c278ee7a6bb56045a4b3d8441a1cd11660f41b7939", size = 21912, upload-time = "2026-09-26T13:58:09.458Z" },
 ]
 
 [[package]]
@@ -1032,15 +1046,6 @@ dependencies = [
     { name = "six" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/44/8e/250fab1cafeea43f4eb11f1d64cd6313f639965ff62cb0d9da3883655781/docrep-0.3.2.tar.gz", hash = "sha256:ed8a17e201abd829ef8da78a0b6f4d51fb99a4cbd0554adbed3309297f964314", size = 33197, upload-time = "2021-02-16T09:01:50.183Z" }
-
-[[package]]
-name = "docstring-parser"
-version = "0.18.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/e0/4d/f332313098c1de1b2d2ff91cf2674415cc7cddab2ca1b01ae29774bd5fdf/docstring_parser-0.18.0.tar.gz", hash = "sha256:292510982205c12b1248696f44959db3cdd1740237a968ea1e2e7a900eeb2015", size = 29341, upload-time = "2026-04-14T04:09:19.867Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a7/5f/ed01f9a3cdffbd5a008556fc7b2a08ddb1cc6ace7effa7340604b1d16699/docstring_parser-0.18.0-py3-none-any.whl", hash = "sha256:b3fcbed555c47d8479be0796ef7e19c2670d428d72e96da63f3a40122860374b", size = 22484, upload-time = "2026-04-14T04:09:18.638Z" },
-]
 
 [[package]]
 name = "donfig"
@@ -2198,28 +2203,30 @@ wheels = [
 
 [[package]]
 name = "lazyslide"
-version = "0.11.1.post8.dev0+6faca48"
-source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#6faca484ebd6ad1bb0592a63d682362c45827795" }
+version = "0.13.0.post3.dev0+2aea22b"
+source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#2aea22bcbd8368a2df52a59719b2b0a200ccae11" }
 dependencies = [
-    { name = "cyclopts" },
+    { name = "huggingface-hub" },
     { name = "lazyslide-models" },
     { name = "legendkit" },
     { name = "matplotlib" },
     { name = "matplotlib-scalebar" },
+    { name = "numba" },
     { name = "psutil" },
     { name = "rich" },
     { name = "scikit-image" },
     { name = "scikit-learn" },
+    { name = "scipy" },
     { name = "seaborn" },
-    { name = "timm" },
     { name = "torch" },
+    { name = "torchvision" },
     { name = "wsidata" },
 ]
 
 [[package]]
 name = "lazyslide-models"
-version = "0.0.4"
-source = { git = "https://github.com/rendeirolab/lazyslide-models.git?branch=main#0127beb5ff7989005f0eff7b481a95b989c4187f" }
+version = "0.1.0.post1.dev0+41bd5ec"
+source = { git = "https://github.com/rendeirolab/lazyslide-models.git?branch=main#41bd5ec673a5ffed647426130d2f16c7ddca31cb" }
 dependencies = [
     { name = "numpy" },
     { name = "opencv-python-headless" },
@@ -2244,6 +2251,7 @@ dependencies = [
     { name = "dask-jobqueue" },
     { name = "dask-labextension" },
     { name = "decoupler" },
+    { name = "deepspotm" },
     { name = "diffusers" },
     { name = "einops" },
     { name = "einops-exts" },
@@ -2263,7 +2271,6 @@ dependencies = [
     { name = "mpl-fontkit" },
     { name = "muon" },
     { name = "nbconvert" },
-    { name = "ome-zarr" },
     { name = "open-clip-torch" },
     { name = "pandas" },
     { name = "protobuf" },
@@ -2293,6 +2300,7 @@ requires-dist = [
     { name = "dask-jobqueue", specifier = ">=0.9.0" },
     { name = "dask-labextension", specifier = ">=7.0.0" },
     { name = "decoupler", specifier = ">=2.1.1" },
+    { name = "deepspotm", git = "https://github.com/ratschlab/DeepSpotM.git" },
     { name = "diffusers", specifier = ">=0.36.0" },
     { name = "einops", specifier = ">=0.8.1" },
     { name = "einops-exts", specifier = ">=0.0.4" },
@@ -2312,7 +2320,6 @@ requires-dist = [
     { name = "mpl-fontkit", specifier = ">=0.5.1" },
     { name = "muon", specifier = ">=0.1.7" },
     { name = "nbconvert", specifier = ">=7.16.6" },
-    { name = "ome-zarr", specifier = "==0.13.0" },
     { name = "open-clip-torch", specifier = ">=3.3.0" },
     { name = "pandas", specifier = "<3.0" },
     { name = "protobuf", specifier = ">=6.31.1" },
@@ -3335,11 +3342,12 @@ wheels = [
 
 [[package]]
 name = "ome-zarr"
-version = "0.13.0"
+version = "0.15.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
     { name = "dask" },
+    { name = "deprecated" },
     { name = "fsspec", extra = ["s3"] },
     { name = "numpy" },
     { name = "rangehttpserver" },
@@ -3348,9 +3356,9 @@ dependencies = [
     { name = "toolz" },
     { name = "zarr" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b5/13/566a1a84b88aad11dea5d920b665eeea0df0885b312a4e1b706885ae50ae/ome_zarr-0.13.0.tar.gz", hash = "sha256:29c0ab52045c1b9d3037444dab691876591ec1db74c4a01e10cb0f0f4288a6e5", size = 71802, upload-time = "2026-02-06T14:00:57.619Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8b/ee/0e99c62dd3d453c9fb84d8c8cc9f64e255c2d7638546836516282fae2be5/ome_zarr-0.15.0.tar.gz", hash = "sha256:e9479d3a9849c194a616355290f6ae574a7d4402559c5f7005be20cf81945435", size = 81497, upload-time = "2026-04-08T11:57:25.475Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/47/f8/9d2945ef9a64de619f52158b8bd27eecad971ff327139b8082796319f858/ome_zarr-0.13.0-py3-none-any.whl", hash = "sha256:895e9530bc81c487a6281644a16b2888ca8d992685ec116bb529a5386aa7d4a2", size = 42109, upload-time = "2026-02-06T14:00:56.646Z" },
+    { url = "https://files.pythonhosted.org/packages/a8/71/159de9929fe98326ada41393d2133fda3f9869ea10bf94996c48846ff68f/ome_zarr-0.15.0-py3-none-any.whl", hash = "sha256:99789b0c4c27fbd197ab1a8bb3ae58b1c7b4e72d0d6b95e9dda6e6416623d3eb", size = 45200, upload-time = "2026-04-08T11:57:24.399Z" },
 ]
 
 [[package]]
@@ -3580,6 +3588,27 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/be/44/ed13eccdd0519eff265f44b670d46fbb0ec813e2274932dc1c0e48520f7d/patsy-1.0.2.tar.gz", hash = "sha256:cdc995455f6233e90e22de72c37fcadb344e7586fb83f06696f54d92f8ce74c0", size = 399942, upload-time = "2025-10-20T16:17:37.535Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f1/70/ba4b949bdc0490ab78d545459acd7702b211dfccf7eb89bbc1060f52818d/patsy-1.0.2-py2.py3-none-any.whl", hash = "sha256:37bfddbc58fcf0362febb5f54f10743f8b21dd2aa73dec7e7ef59d1b02ae668a", size = 233301, upload-time = "2025-10-20T16:17:36.563Z" },
+]
+
+[[package]]
+name = "peft"
+version = "0.21.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "accelerate" },
+    { name = "huggingface-hub" },
+    { name = "numpy" },
+    { name = "packaging" },
+    { name = "psutil" },
+    { name = "pyyaml" },
+    { name = "safetensors" },
+    { name = "torch" },
+    { name = "tqdm" },
+    { name = "transformers" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/45/e4/e0277d952d2500980c5c7e52b2910e795a3cca0580b944b8f44063439fed/peft-0.21.1.tar.gz", hash = "sha256:95f239f84da1919a6d0c64c4049650a6a79804e3a87c78f35c597da771e31f68", size = 983017, upload-time = "2026-09-29T09:23:21.548Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/10/48/4a18f117e05d0bcc3236a6c064c78f5b8c5b5248055a34f6940e7304def6/peft-0.21.1-py3-none-any.whl", hash = "sha256:6b99d659a33acc17295c0838f1e58267337b8c30ac9aef0c8f2d48364d3f24e2", size = 835387, upload-time = "2026-09-29T09:23:17.798Z" },
 ]
 
 [[package]]
@@ -4618,19 +4647,6 @@ wheels = [
 ]
 
 [[package]]
-name = "rich-rst"
-version = "2.0.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "pygments" },
-    { name = "rich" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/57/56/3191bae66b08ccc637ea8120426068bcb361cc323c96404c310886937067/rich_rst-2.0.1.tar.gz", hash = "sha256:cbe236ed0901d1ec8427cc6a50bf0a34353ba28ad014dc24def68bfe7f3b9e68", size = 300570, upload-time = "2026-05-16T00:47:57.362Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a0/3d/55c17d3ebdf3cd81356002afe5bef9bb8af631db2819785b6eac845b925b/rich_rst-2.0.1-py3-none-any.whl", hash = "sha256:7ee15f345ce25fa02b582c272a6cdbaf0c21243e38061cea273cff659bf3ef61", size = 272922, upload-time = "2026-05-16T00:47:55.508Z" },
-]
-
-[[package]]
 name = "rpds-py"
 version = "2026.5.1"
 source = { registry = "https://pypi.org/simple" }
@@ -5198,7 +5214,7 @@ wheels = [
 
 [[package]]
 name = "spatialdata"
-version = "0.7.2"
+version = "0.7.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anndata" },
@@ -5230,9 +5246,9 @@ dependencies = [
     { name = "xarray-spatial" },
     { name = "zarr" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/81/b4/3cd97a7f473def2cf0fdb94d980efd5982274e8aedae944af144327b979c/spatialdata-0.7.2.tar.gz", hash = "sha256:17cfa4be157dd00d5dfc009038b2f0ba5ceaaad4fb15cf58cb8b53b7e28fc75e", size = 347975, upload-time = "2026-02-09T15:45:07.182Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3c/50/248fae79a62f3d9dffbe70e9b66be6e3f8aaf77caa20a8c931a79256b689/spatialdata-0.7.3.tar.gz", hash = "sha256:6054d66d00e19af96368a897faa0b369f3a25dbf9e0371f091129f8522ee6986", size = 359317, upload-time = "2026-05-06T16:02:42.446Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7d/eb/15962d23094016d13f057e9de97021f8cd6b16bc39f21bab8e55e3f0a63e/spatialdata-0.7.2-py3-none-any.whl", hash = "sha256:c41f985dee9c272b790dca0ab54130128af426591df61c8d12556d6aa86c70b5", size = 192281, upload-time = "2026-02-09T15:45:06.061Z" },
+    { url = "https://files.pythonhosted.org/packages/5d/bd/76cd29c982ed8f06db839411f1f44c521bf36b8714074652368353856b44/spatialdata-0.7.3-py3-none-any.whl", hash = "sha256:15e0df647f149a8be70cef6b866dcf033c71890440583bca8bb1c20c37566e6c", size = 199244, upload-time = "2026-05-06T16:02:40.994Z" },
 ]
 
 [[package]]
@@ -5890,8 +5906,8 @@ wheels = [
 
 [[package]]
 name = "wsidata"
-version = "0.10.1.post1.dev0+8811775"
-source = { git = "https://github.com/rendeirolab/wsidata?branch=main#8811775c67672126791c87c2da516eb1b0eb008a" }
+version = "0.12.0"
+source = { git = "https://github.com/rendeirolab/wsidata?branch=main#0f93c4d8c1255c1b8b7757b98e1e5cbdc13a6286" }
 dependencies = [
     { name = "opencv-python-headless" },
     { name = "openslide-bin" },
