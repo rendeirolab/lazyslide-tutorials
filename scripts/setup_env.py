@@ -31,6 +31,10 @@ DATA_FILES: dict[str, tuple[str, ...]] = {
         "GTEx_artery_RNA.h5ad",
         "agg_conch_features.h5ad",
         "gtex_stomach_subset.zip",
+        "GTEx_artery_dataset.csv.gz",
+        "gtex_artery_data/GTEX-PW2O-1926.svs",
+        "gtex_artery_data/GTEX-ZYT6-1526.svs",
+        "gtex_artery_data/GTEX-O5YU-0926.svs",
     ),
     "MahmoodLab/hest": (
         "wsis/NCBI776.tif",

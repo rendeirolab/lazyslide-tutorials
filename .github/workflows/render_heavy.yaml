@@ -10,7 +10,7 @@ on:
       notebook:
         description: Notebook in tutorials/heavy/
         type: string
-        default: multiple_slides.ipynb
+        required: true
       flavor:
         description: HF Jobs hardware
         type: choice
