@@ -2203,8 +2203,8 @@ wheels = [
 
 [[package]]
 name = "lazyslide"
-version = "0.13.0.post3.dev0+2aea22b"
-source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#2aea22bcbd8368a2df52a59719b2b0a200ccae11" }
+version = "0.13.0.post4.dev0+3ff11e7"
+source = { git = "https://github.com/rendeirolab/lazyslide?branch=main#3ff11e7806551d30ee1d5e09c4d3caa61f1bd3fa" }
 dependencies = [
     { name = "huggingface-hub" },
     { name = "lazyslide-models" },
@@ -2225,8 +2225,8 @@ dependencies = [
 
 [[package]]
 name = "lazyslide-models"
-version = "0.1.0.post1.dev0+41bd5ec"
-source = { git = "https://github.com/rendeirolab/lazyslide-models.git?branch=main#41bd5ec673a5ffed647426130d2f16c7ddca31cb" }
+version = "0.1.0.post3.dev0+5ea5077"
+source = { git = "https://github.com/rendeirolab/lazyslide-models.git?branch=main#5ea50772154fffd4c79bcf9c25259689aa0ea10e" }
 dependencies = [
     { name = "numpy" },
     { name = "opencv-python-headless" },
