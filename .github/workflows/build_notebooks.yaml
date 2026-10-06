@@ -88,6 +88,10 @@ jobs:
           # Re-register all notebooks; cache will reuse existing executions when hash matches
           uv run jcache notebook add tutorials/*.ipynb
           uv run jcache project execute --executor local-parallel --timeout 1800
+          # Kernels that start in the same second can race for a port ("Address
+          # already in use") and die before running a cell. A second pass runs
+          # only the notebooks the first pass did not cache.
+          uv run jcache project execute --executor local-parallel --timeout 1800
 
       - name: output logs
         run: |
