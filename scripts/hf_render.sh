@@ -7,7 +7,7 @@
 #
 # Required env:
 #   CI_SHA       git commit to render
-#   NOTEBOOK     notebook path in the repo, e.g. tutorials/heavy/multiple_slides.ipynb
+#   NOTEBOOK     notebook path in the repo, e.g. tutorials/heavy/<notebook>.ipynb
 #   OUT_DIR      where the executed notebook goes, e.g. /out/<run id>
 # Optional env:
 #   CI_REPO_URL  default: https://github.com/rendeirolab/lazyslide-tutorials.git

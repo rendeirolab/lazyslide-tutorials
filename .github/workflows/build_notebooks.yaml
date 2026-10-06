@@ -50,32 +50,9 @@ jobs:
       # `uv lock --upgrade` in a PR. The in-house packages track main.
       - name: Install project
         run: uv sync --dev --upgrade-package lazyslide --upgrade-package wsidata --upgrade-package lazyslide-models
-      - name: Restore model and dataset cache
-        id: artifact-cache
-        uses: actions/cache/restore@v5
-        with:
-          path: .cache/huggingface
-          key: ${{ runner.os }}-hf-v1-${{ hashFiles('scripts/setup_env.py', 'uv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-hf-v1-
-
+      # No cache for these downloads: they take about 2.5 min, while a cache of
+      # them (26 GB or more) exceeds GitHub's 10 GB limit and never restores.
       - name: Setup data
-        run: uv run scripts/setup_env.py
-
-      # Save before notebook execution so extracted or modified tutorial data
-      # cannot contaminate the reusable download cache.
-      - name: Save model and dataset cache
-        if: steps.artifact-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v5
-        with:
-          path: .cache/huggingface
-          key: ${{ steps.artifact-cache.outputs.cache-primary-key }}
-
-      - name: Verify model and dataset cache offline
-        env:
-          HF_HUB_OFFLINE: 1
-          HF_DATASETS_OFFLINE: 1
-          TRANSFORMERS_OFFLINE: 1
         run: uv run scripts/setup_env.py
 
       - name: Compute notebook source hash
