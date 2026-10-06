@@ -3,13 +3,17 @@ and genomics_integration.ipynb load.
 
 It runs the steps of multiple_slides.ipynb on every slide in
 GTEx_artery_dataset.csv.gz: CONCH features for each tile, their slide mean, and
-each term's top-100 score from the tile-to-term similarities. The result has
+each term's topk_score (k=100) over the tile-to-term similarities. The result has
 one row per slide, indexed by Tissue Sample Id in the order of the table: the
 slide's mean CONCH feature, its metadata and one score column per term.
 
 Usage: uv run scripts/build_agg_conch_features.py <out.h5ad> [slide ids]
 Without slide ids it runs all 45 slides. It writes one zarr store per slide to
 data/ in the working directory, as the tutorial does.
+
+The published file was built from commit 9da4ef9 (PR #9) on HF Jobs, in 36 min
+on one L4 GPU. Its sha256 is
+26ff197c5ab2016c05a00911730d742e064be8602bc2ab2a027f7e8a8cd2584c.
 """
 
 import sys
